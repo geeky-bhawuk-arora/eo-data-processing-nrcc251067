@@ -1,0 +1,23 @@
+		Product Accuracy Report:
+
+ 	SatID     : IRS-R2
+ 	ProductID : 2511545171
+ 	Sensor    : L4FX
+ 	Subscene  : D
+
+ 	TotalTiepoints:13645
+ 	NoTiepointsRejected: 12633
+ 	NoGoodTiepoints: 1012
+ 	 MeanErrorInPixelDirection:   -0.42626 pixels
+ 	 MeanErrorInScanDirection:   -0.18938 pixels
+ 	 MeanErrorInPixelDirection:   -2.13128 m
+ 	 MeanErrorInScanDirection:   -0.94688 m
+ 	 StdDevInPixelDirection:    1.31277 pixels
+ 	 StdDevInScanDirection:    1.35636 pixels
+ 	 StdDevInPixelDirection:    6.56387 m
+ 	 StdDevInScanDirection:    6.78181 m
+ 	 CoVariance:    0.08320 pixels
+ 	 RMSalongEigenAxes(rmin) :    1.29616 pixels
+ 	 RMSalongEigenAxes(rmax) :    1.37225 pixels
+
+ ------------------ END OF REPORT ----------------
