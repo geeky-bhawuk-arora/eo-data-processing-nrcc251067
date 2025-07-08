@@ -1,0 +1,60 @@
+🔹 INPUT
+Input shape: (3, 256, 256)
+This means the model takes a 3-channel (RGB) image of size 256×256 pixels.
+
+🔹 ENCODER (Contracting Path)
+The encoder captures contextual features by progressively downsampling the input.
+
+Each encoder block:
+[Conv → BatchNorm → ReLU] × 2: Two convolutional layers followed by batch normalization and ReLU activation. This helps learn features while stabilizing training.
+
+MaxPool: Reduces the spatial size by half (e.g., 256×256 → 128×128), allowing deeper feature learning and increasing receptive field.
+
+Feature depth progression:
+64 → 128 → 256 → 512: As you go deeper, the number of feature channels increases, capturing more complex features. For example:
+
+Block 1 output: 64 channels
+
+Block 2 output: 128 channels
+
+Block 3 output: 256 channels
+
+Block 4 output: 512 channels
+
+🔹 DECODER (Expanding Path)
+The decoder reconstructs the spatial details from the encoded features using upsampling and skip connections.
+
+Each decoder block:
+Upsample: Increases spatial resolution (e.g., 32×32 → 64×64).
+
+Concatenate Skip Connection: Merges corresponding feature map from encoder (same spatial size) to bring back spatial details lost during downsampling.
+
+[Conv → BN → ReLU] × 2: Refines the combined features.
+
+Feature depth progression:
+512 → 256 → 128 → 64: Feature channels reduce as we go up, similar to encoder but in reverse.
+
+🔹 FINAL LAYER
+Conv2D (1×1): Reduces channel dimension to match the number of output classes (3 in your case: No Cloud, Cloud, Shadow).
+
+Softmax (in inference): Applies softmax across the 3 channels per pixel to produce per-pixel class probabilities.
+
+🔹 VISUAL FLOW
+vbnet
+Copy
+Edit
+Input (3, 256, 256)
+     ↓
+Encoder:
+[Conv-BN-ReLU] ×2 → MaxPool
+     ↓
+64 → 128 → 256 → 512 channels
+     ↓
+Bottleneck (maybe 1024 channels)
+     ↑
+Decoder:
+Upsample → Skip → [Conv-BN-ReLU] ×2
+512 → 256 → 128 → 64 channels
+     ↑
+Final Conv2D (1x1) → (3, 256, 256)
+Softmax → per-pixel class probabilities
